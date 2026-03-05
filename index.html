@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema de Avaliação</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+    <div id="loading-overlay" class="hidden">
+        <div class="loader-container">
+            <div class="spinner"></div>
+            <p>Carregando sistema...</p>
+        </div>
+    </div>
+
+    <div id="toast" class="toast hidden">
+        <span id="toast-icon"></span>
+        <span id="toast-message"></span>
+    </div>
+
+    <!-- TELA SELEÇÃO -->
+    <div id="telaSelecao">
+
+        <h3>Selecionar Aluno</h3>
+
+        <label>Localidade:
+            <select id="localidade">
+                <option value="">Selecione</option>
+                <option value="SEDE">SEDE</option>
+                <option value="RURAL">RURAL</option>
+            </select>
+        </label>
+
+        <label>Escola:
+            <select id="escola" disabled>
+                <option value="">Selecione</option>
+            </select>
+        </label>
+
+        <label>Ano:
+            <select id="ano" disabled>
+                <option value="">Selecione</option>
+            </select>
+        </label>
+
+        <label>Turma:
+            <select id="turma" disabled>
+                <option value="">Selecione</option>
+            </select>
+        </label>
+
+        <label>Aluno:
+            <select id="aluno" disabled>
+                <option value="">Selecione</option>
+            </select>
+        </label>
+
+        <label>Tipo de Texto:
+            <select id="tipoTextoSelect">
+                <option value="">Selecione</option>
+                <option value="1">60 palavras</option>
+                <option value="2">100 palavras</option>
+            </select>
+        </label>
+
+        <br><br>
+        <button id="btnIniciarAvaliacao">Iniciar Avaliação</button>
+
+    </div>
+
+
+    <!-- TELA AVALIAÇÃO -->
+
+    <div id="telaAvaliacao" class="hidden">
+
+        <button onclick="voltarParaSelecao()">⬅ Voltar</button>
+
+        <h2>Avaliação de Fluência</h2>
+
+        <div id="textoContainer">
+            <h3>Texto da Avaliação</h3>
+            <div id="textoTeste" class="texto-avaliacao"></div>
+        </div>
+
+        <div id="prosodia">
+
+            <p><strong>Prosódia:</strong></p>
+
+            <label class="prosodia-item"><input type="radio" name="prosodiaNivel" value="DLA"> DLA</label>
+            <label class="prosodia-item"><input type="radio" name="prosodiaNivel" value="NL"> NL</label>
+            <label class="prosodia-item"><input type="radio" name="prosodiaNivel" value="NS"> NS</label>
+            <label class="prosodia-item"><input type="radio" name="prosodiaNivel" value="N1"> N1</label>
+            <label class="prosodia-item"><input type="radio" name="prosodiaNivel" value="N2"> N2</label>
+            <label class="prosodia-item"><input type="radio" name="prosodiaNivel" value="N3"> N3</label>
+            <label class="prosodia-item"><input type="radio" name="prosodiaNivel" value="N4"> N4</label>
+            <label class="prosodia-item"><input type="radio" name="prosodiaNivel" value="N5"> N5</label>
+
+        </div>
+
+        <br>
+
+        <div id="blocoCompreensao"></div>
+
+        <br>
+
+        <button id="iniciarBtn">Iniciar Avaliação</button>
+
+        <p>Tempo restante: <span id="tempo">60</span>s</p>
+        <p id="statusAvaliacao">Status: ⏳ Aguardando início</p>
+
+        <div id="visor">
+
+            <p>Total de palavras: <span id="totalPalavras">0</span></p>
+            <p>Palavras lidas: <span id="palavrasLidas">0</span></p>
+            <p>Palavras com erro: <span id="palavrasErro">0</span></p>
+            <p>Velocidade: <span id="velocidadeCalc">0</span>%</p>
+            <p>Precisão: <span id="precisaoCalc">0</span>%</p>
+            <p>Última palavra: <span id="ultimaPalavraTexto">-</span></p>
+
+        </div>
+
+        <button id="reiniciarBtn" class="btn-reiniciar">🔄 Reiniciar Avaliação</button>
+        <button id="enviarBtn">Enviar Avaliação</button>
+
+    </div>
+
+
+    <script src="js/ui.js"></script>
+    <script src="js/selecao.js"></script>
+    <script src="js/avaliacao.js"></script>
+    <script src="js/app.js"></script>
+
+</body>
+
+</html>
