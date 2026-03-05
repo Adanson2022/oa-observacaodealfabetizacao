@@ -1,15 +1,14 @@
 // AvaliacaoService.js
-// Responsável por registrar e listar avaliações
+import { getRequest, postRequest } from "./api.js";
 
-async function registrarAvaliacao(avaliacao) {
-    return await postRequest("registrarAvaliacao", avaliacao);
+export function criarAvaliacaoService() {
+    async function registrarAvaliacao(avaliacao) {
+        return await postRequest("registrarAvaliacao", avaliacao);
+    }
+
+    async function listarAvaliacoes(alunoId) {
+        return await getRequest({ action: "listarAvaliacoes", alunoid: alunoId });
+    }
+
+    return { registrarAvaliacao, listarAvaliacoes };
 }
-
-async function listarAvaliacoes(alunoId) {
-    return await getRequest({ action: "listarAvaliacoes", alunoid: alunoId });
-}
-
-export const AvaliacaoService = {
-    registrarAvaliacao,
-    listarAvaliacoes
-};

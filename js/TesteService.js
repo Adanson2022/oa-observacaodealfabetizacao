@@ -1,20 +1,18 @@
 // TesteService.js
-// Responsável por buscar testes e perguntas
+import { getRequest } from "./api.js";
 
-async function buscarTestes() {
-    return await getRequest({ action: "listarTestes" }); // Ajuste se seu backend tiver listarTestes
+export function criarTesteService() {
+    async function buscarTestes() {
+        return await getRequest({ action: "listarTestes" });
+    }
+
+    async function buscarTestePorId(id) {
+        return await getRequest({ action: "buscarTestePorId", testeId: id });
+    }
+
+    async function buscarPerguntasCompreensao(testeId) {
+        return await getRequest({ action: "buscarPerguntasCompreensao", testeId });
+    }
+
+    return { buscarTestes, buscarTestePorId, buscarPerguntasCompreensao };
 }
-
-async function buscarTestePorId(id) {
-    return await getRequest({ action: "buscarTestePorId", testeId: id });
-}
-
-async function buscarPerguntasCompreensao(testeId) {
-    return await getRequest({ action: "buscarPerguntasCompreensao", testeId });
-}
-
-export const TesteService = {
-    buscarTestes,
-    buscarTestePorId,
-    buscarPerguntasCompreensao
-};
