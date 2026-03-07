@@ -17,12 +17,17 @@ export function inicializarSelecao({ AlunosService, TesteService, mostrarToast})
     async function initSelecao() {
         try {
             const resAlunos = await AlunosService.listarAlunos();
-            todosAlunos = typeof resAlunos.dados === "string" ? JSON.parse(resAlunos.dados).dados : resAlunos.dados;
+
+            if (!resAlunos.sucesso) {
+                throw new Error("Falha ao carregar alunos");
+            }
+
+            todosAlunos = resAlunos.dados || [];
 
             AppState.setAlunos(todosAlunos);
 
             const resTestes = await TesteService.listarTestes();
-            todosTestes = resTestes;
+            todosTestes = resTestes || [];
 
             AppState.setTestes(todosTestes);
 
@@ -173,7 +178,7 @@ export function inicializarSelecao({ AlunosService, TesteService, mostrarToast})
 
             const alunoSelecionado = todosAlunos.find(a => a.id === Number(alunoEl.value));
 
-            const testeSelecionado = todosTestes.find(t => t.id || t.Id_teste == tipoTextoSelect.value);
+            const testeSelecionado = todosTestes.find(t => (t.id || t.Id_teste) == tipoTextoSelect.value);
             console.log("Aluno selecionado:", alunoSelecionado);
             console.log("Teste selecionado:", testeSelecionado);
             const texto = await TesteService.buscarTextoPorTeste(tipoTextoSelect.value);

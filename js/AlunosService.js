@@ -7,9 +7,14 @@ export function criarAlunosService() {
     async function listarAlunos() {
         try {
             const res = await getRequest({ action: "listarAlunos" });
-            if (res.sucesso) return res; // retorna o objeto completo {sucesso, dados}
+
+            if (res.sucesso) {
+                return res;
+            }
+
             console.error("Erro ao listar alunos:", res.erro);
             return { sucesso: false, dados: [] };
+
         } catch (err) {
             console.error("Erro na requisição listarAlunos:", err);
             return { sucesso: false, dados: [] };

@@ -5,39 +5,66 @@ export function criarTesteService() {
 
     async function listarTestes() {
 
-        const res = await getRequest({
-            action: "listarTestes"
-        });
+        try {
 
-        if (res.sucesso) return res.dados || [];
+            const res = await getRequest({
+                action: "listarTestes"
+            });
 
-        throw new Error(res.erro || "Erro ao listar testes");
+            if (res?.sucesso) return res.dados || [];
+
+            throw new Error(res?.erro || "Erro ao listar testes");
+
+        } catch (err) {
+
+            console.error("Erro em listarTestes:", err);
+            throw err;
+
+        }
 
     }
 
     async function buscarTextoPorTeste(testeId) {
 
-        const res = await getRequest({
-            action: "buscarTextoPorTeste",
-            testeId
-        });
+        try {
 
-        if (res.sucesso) return res.dados;
+            const res = await getRequest({
+                action: "buscarTextoPorTeste",
+                testeId
+            });
 
-        throw new Error(res.erro || "Erro ao buscar texto");
+            if (res?.sucesso) return res.dados;
+
+            throw new Error(res?.erro || "Erro ao buscar texto");
+
+        } catch (err) {
+
+            console.error("Erro em buscarTextoPorTeste:", err);
+            throw err;
+
+        }
 
     }
 
     async function buscarPerguntasCompreensao(testeId) {
 
-        const res = await getRequest({
-            action: "buscarPerguntasCompreensao",
-            testeId
-        });
+        try {
 
-        if (res.sucesso) return res.dados || [];
+            const res = await getRequest({
+                action: "buscarPerguntasCompreensao",
+                testeId
+            });
 
-        throw new Error(res.erro || "Erro ao buscar perguntas");
+            if (res?.sucesso) return res.dados || [];
+
+            throw new Error(res?.erro || "Erro ao buscar perguntas");
+
+        } catch (err) {
+
+            console.error("Erro em buscarPerguntasCompreensao:", err);
+            throw err;
+
+        }
 
     }
 
