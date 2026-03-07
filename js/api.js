@@ -1,15 +1,30 @@
 // api.js
 export const BASE_URL = "https://script.google.com/macros/s/AKfycby2QLUorQY7yA9-633cnAZI4vC9DpAVd1WZX5bjE48T_RdQ53Ol6pdFG_HfVhtF7VNHqA/exec";
 
-export async function getRequest(params) {
+export function getRequest(params){
+
+  return new Promise((resolve, reject) => {
+
+    const callbackName = "jsonp_callback_" + Math.round(100000 * Math.random());
+
+    window[callbackName] = function(data){
+      delete window[callbackName];
+      document.body.removeChild(script);
+      resolve(data);
+    };
+
     const query = new URLSearchParams(params).toString();
-    try {
-        const res = await fetch(`${BASE_URL}?${query}`);
-        return await res.json();
-    } catch (err) {
-        console.error("Erro no GET:", err);
-        return { sucesso: false, erro: err.message };
-    }
+
+    const script = document.createElement("script");
+
+    script.src = `${BASE_URL}?${query}&callback=${callbackName}`;
+
+    script.onerror = reject;
+
+    document.body.appendChild(script);
+
+  });
+
 }
 
 export async function postRequest(action, payload) {
