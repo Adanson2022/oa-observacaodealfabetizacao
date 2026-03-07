@@ -1,5 +1,5 @@
 // api.js
-export const BASE_URL = "https://script.google.com/macros/s/AKfycbzD_wRcYCNIAvfUFKblESFT2iET3ukMbiqOO8xS053o6r2xUZO6bew2rjM3DfnKjcTonQ/exec";
+export const BASE_URL = "https://script.google.com/macros/s/AKfycbz4G0ZGnxYatbU3Vyp0_qXmNiAB0PgEcfzoG5Zq_-YmXHlBMiyHa9Uuxg7LY4cNA6X2Kg/exec";
 
 export async function getRequest(params) {
     const query = new URLSearchParams(params).toString();
