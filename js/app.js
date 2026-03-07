@@ -1,29 +1,56 @@
 // app.js
-import * as UI from "./ui.js";
-import { criarAlunoService } from "./AlunoService.js";
+
+import { criarAlunosService } from "./AlunosService.js";
+import { criarTesteService } from "./TesteService.js";
 import { criarAvaliacaoService } from "./AvaliacaoService.js";
-import { TesteService } from "./TesteService.js";
-import { inicializarSelecao } from "./selecao.js";
-import { inicializarAvaliacao } from "./avaliacao.js";
+import { inicializarController } from "./Controller.js";
+import { Router } from "./Router.js";
 
-document.addEventListener("DOMContentLoaded", () => {
-    console.log("Sistema iniciado");
+const AlunosService = criarAlunosService();
+const TesteService = criarTesteService();
+const AvaliacaoService = criarAvaliacaoService();
 
-    const AlunoService = criarAlunoService();
-    const AvaliacaoService = criarAvaliacaoService();
+function mostrarToast(msg, tipo = "info") {
 
-    const avaliacaoModule = inicializarAvaliacao({
+    const toast = document.getElementById("toast");
+    const toastMsg = document.getElementById("toast-message");
+
+    toastMsg.textContent = msg;
+
+    toast.className = `toast ${tipo}`;
+    toast.classList.remove("hidden");
+
+    setTimeout(() => {
+        toast.classList.add("hidden");
+    }, 3000);
+
+}
+
+function voltarParaSelecao(){
+    Router.mostrarTela("tela-selecao");
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+  
+    inicializarController({
+        AlunosService,
         AvaliacaoService,
         TesteService,
-        mostrarToast: UI.mostrarToast,
-        voltarParaSelecao: UI.voltarParaSelecao
+        mostrarToast,
+        voltarParaSelecao
     });
+    
+  console.log("Sistema iniciado");
 
-    inicializarSelecao({
-        AlunoService,
-        TesteService,
-        mostrarToast: UI.mostrarToast,
-        mostrarAvaliacao: UI.mostrarAvaliacao,
-        iniciarAvaliacaoUI: avaliacaoModule.iniciarAvaliacaoUI
-    });
+  Router.mostrarTela("tela-selecao");
+
 });
+
+if ("serviceWorker" in navigator) {
+
+  navigator.serviceWorker.register("service-worker.js")
+  .then(() => {
+    console.log("Service Worker registrado");
+  });
+
+}

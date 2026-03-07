@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Teste de Seleção</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        select, button { margin: 10px 0; padding: 5px; width: 200px; }
+        label { display: block; margin-top: 15px; }
+    </style>
+</head>
+<body>
+    <h1>Teste de Seleção de Alunos</h1>
+
+    <label for="localidade">Localidade:</label>
+    <select id="localidade">
+        <option value="">Selecione</option>
+    </select>
+
+    <label for="escola">Escola:</label>
+    <select id="escola" disabled>
+        <option value="">Selecione</option>
+    </select>
+
+    <label for="ano">Ano:</label>
+    <select id="ano" disabled>
+        <option value="">Selecione</option>
+    </select>
+
+    <label for="turma">Turma:</label>
+    <select id="turma" disabled>
+        <option value="">Selecione</option>
+    </select>
+
+    <label for="aluno">Aluno:</label>
+    <select id="aluno" disabled>
+        <option value="">Selecione</option>
+    </select>
+
+    <label for="tipoTextoSelect">Tipo de Texto:</label>
+    <select id="tipoTextoSelect">
+        <option value="">Selecione</option>
+        <option value="narrativa">Narrativa</option>
+        <option value="descritivo">Descritivo</option>
+    </select>
+
+    <button id="btnIniciarAvaliacao">Iniciar Avaliação</button>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { criarAlunosService } from "./AlunosService.js";
+        import { criarTesteService } from "./TesteService.js";
+        import { inicializarSelecao } from "./selecao.js";
+
+        // Função de toast
+        function mostrarToast(msg, tipo = "info") {
+            alert(`${tipo.toUpperCase()}: ${msg}`);
+        }
+
+        // Funções fictícias para avaliação
+        function mostrarAvaliacao() {
+            console.log("Mostrando avaliação...");
+        }
+
+        function iniciarAvaliacaoUI() {
+            console.log("Iniciando UI da avaliação...");
+        }
+
+        // Instanciando serviços
+        const AlunosService = criarAlunosService();
+        const TesteService = criarTesteService();
+
+        // Inicializando seleção
+        document.addEventListener("DOMContentLoaded", () => {
+            console.log("Sistema iniciado");
+            inicializarSelecao({
+                AlunosService,
+                TesteService,
+                mostrarToast,
+                mostrarAvaliacao,
+                iniciarAvaliacaoUI
+            });
+        });
+    </script>
+</body>
+</html>

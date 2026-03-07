@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <title>Sistema de Avaliação</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="manifest" href="manifest.json">
 </head>
-
 <body>
 
     <!-- OVERLAY DE LOADING -->
@@ -24,13 +23,12 @@
     </div>
 
     <!-- TELA DE SELEÇÃO -->
-    <div id="telaSelecao">
-        <h3>Selecionar Aluno</h3>
+    <div id="tela-selecao" class="tela">
+
+        <h2>Selecionar Aluno</h2>
         <label>Localidade:
             <select id="localidade">
                 <option value="">Selecione</option>
-                <option value="SEDE">SEDE</option>
-                <option value="RURAL">RURAL</option>
             </select>
         </label>
 
@@ -67,11 +65,17 @@
         </label>
 
         <br><br>
-        <button id="btnIniciarAvaliacao">Iniciar Avaliação</button>
+        <button id="btnIrParaAvaliacao">
+            Ir Para Avaliação
+        </button>
+
     </div>
 
     <!-- TELA DE AVALIAÇÃO -->
-    <div id="telaAvaliacao" class="hidden">
+
+
+
+    <div id="tela-avaliacao" class="tela" style="display:none">
         <button id="voltarBtn">⬅ Voltar</button>
         <h2>Avaliação de Fluência</h2>
 
@@ -93,10 +97,20 @@
         </div>
 
         <br>
-        <div id="blocoCompreensao"></div>
+
+        <div>
+
+            <h3>Compreensão do Texto</h3>
+
+            <div id="container-compreensao"></div>
+
+        </div>
         <br>
 
-        <button id="iniciarBtn">Iniciar Avaliação</button>
+        <!-- BOTÃO CORRETO PARA INICIAR O TIMER -->
+        <button id="iniciarBtn">
+            Iniciar Avaliação
+        </button>
 
         <p>Tempo restante: <span id="tempo">60</span>s</p>
         <p id="statusAvaliacao">Status: ⏳ Aguardando início</p>
@@ -115,7 +129,7 @@
     </div>
 
     <!-- SCRIPTS -->
-    <!-- Apenas o arquivo raiz precisa ser incluído -->
+
     <script type="module" src="./js/app.js"></script>
 
 </body>

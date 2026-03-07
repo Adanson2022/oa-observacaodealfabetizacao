@@ -2,17 +2,49 @@
 import { getRequest } from "./api.js";
 
 export function criarTesteService() {
-    async function buscarTestes() {
-        return await getRequest({ action: "listarTestes" });
+
+    async function listarTestes() {
+
+        const res = await getRequest({
+            action: "listarTestes"
+        });
+
+        if (res.sucesso) return res.dados || [];
+
+        throw new Error(res.erro || "Erro ao listar testes");
+
     }
 
-    async function buscarTestePorId(id) {
-        return await getRequest({ action: "buscarTestePorId", testeId: id });
+    async function buscarTextoPorTeste(testeId) {
+
+        const res = await getRequest({
+            action: "buscarTextoPorTeste",
+            testeId
+        });
+
+        if (res.sucesso) return res.dados;
+
+        throw new Error(res.erro || "Erro ao buscar texto");
+
     }
 
     async function buscarPerguntasCompreensao(testeId) {
-        return await getRequest({ action: "buscarPerguntasCompreensao", testeId });
+
+        const res = await getRequest({
+            action: "buscarPerguntasCompreensao",
+            testeId
+        });
+
+        if (res.sucesso) return res.dados || [];
+
+        throw new Error(res.erro || "Erro ao buscar perguntas");
+
     }
 
-    return { buscarTestes, buscarTestePorId, buscarPerguntasCompreensao };
+    return {
+        listarTestes,
+        buscarTextoPorTeste,
+        buscarPerguntasCompreensao
+    };
+
 }
