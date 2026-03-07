@@ -16,13 +16,26 @@ export function inicializarSelecao({ AlunosService, TesteService, mostrarToast})
 
     async function initSelecao() {
         try {
+
             const resAlunos = await AlunosService.listarAlunos();
 
             if (!resAlunos.sucesso) {
                 throw new Error("Falha ao carregar alunos");
             }
 
-            todosAlunos = resAlunos.dados || [];
+            let alunos = resAlunos.dados;
+
+            // Corrige caso venha string
+            if (typeof alunos === "string") {
+                alunos = JSON.parse(alunos);
+            }
+
+            // Garante array
+            if (!Array.isArray(alunos)) {
+                alunos = [];
+            }
+
+            todosAlunos = alunos;
 
             AppState.setAlunos(todosAlunos);
 
@@ -35,8 +48,10 @@ export function inicializarSelecao({ AlunosService, TesteService, mostrarToast})
             popularTestes();
 
         } catch (err) {
+
             console.error(err);
             mostrarToast("Erro ao carregar alunos ou testes", "erro");
+
         }
     }
 
