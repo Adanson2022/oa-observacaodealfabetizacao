@@ -1,5 +1,5 @@
 // api.js
-export const BASE_URL = "https://script.google.com/macros/s/AKfycbyS-AfZvLvS0-heUXeiPWUT4MLfST7OJzmz-rXfPuNBPyWoCxFIg4WXS2tafnoy-0M86A/exec";
+export const BASE_URL = "https://script.google.com/macros/s/AKfycbw_GHLUMQD7HLQIR_C4BdKxd1IW96QInqkSLgCw2QBfFP0TlPT3q2590nS-KwrPmyNU/exec";
 
 export async function getRequest(params) {
     const query = new URLSearchParams(params).toString();
@@ -14,10 +14,12 @@ export async function getRequest(params) {
 
 export async function postRequest(action, payload) {
     try {
+        const body = new URLSearchParams();
+        body.append("data", JSON.stringify({ action, payload }));
+
         const res = await fetch(BASE_URL, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ action, payload })
+            body: body
         });
         return await res.json();
     } catch (err) {
