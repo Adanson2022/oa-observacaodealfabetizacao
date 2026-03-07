@@ -14,14 +14,20 @@ export async function getRequest(params) {
 
 export async function postRequest(action, payload) {
     try {
-        const body = new URLSearchParams();
-        body.append("data", JSON.stringify({ action, payload }));
 
         const res = await fetch(BASE_URL, {
             method: "POST",
-            body: body
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                action,
+                payload
+            })
         });
+
         return await res.json();
+
     } catch (err) {
         console.error("Erro no POST:", err);
         return { sucesso: false, erro: err.message };
