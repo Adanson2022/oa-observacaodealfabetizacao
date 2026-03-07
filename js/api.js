@@ -1,5 +1,5 @@
 // api.js
-export const BASE_URL = "https://script.google.com/macros/s/AKfycbw_GHLUMQD7HLQIR_C4BdKxd1IW96QInqkSLgCw2QBfFP0TlPT3q2590nS-KwrPmyNU/exec";
+export const BASE_URL = "https://script.google.com/macros/s/AKfycbzD_wRcYCNIAvfUFKblESFT2iET3ukMbiqOO8xS053o6r2xUZO6bew2rjM3DfnKjcTonQ/exec";
 
 export async function getRequest(params) {
     const query = new URLSearchParams(params).toString();
@@ -13,23 +13,35 @@ export async function getRequest(params) {
 }
 
 export async function postRequest(action, payload) {
+
     try {
 
-        const res = await fetch(BASE_URL, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
+        const body = new URLSearchParams();
+
+        body.append(
+            "data",
+            JSON.stringify({
                 action,
                 payload
             })
+        );
+
+        const res = await fetch(BASE_URL, {
+            method: "POST",
+            body
         });
 
         return await res.json();
 
     } catch (err) {
+
         console.error("Erro no POST:", err);
-        return { sucesso: false, erro: err.message };
+
+        return {
+            sucesso: false,
+            erro: err.message
+        };
+
     }
+
 }
