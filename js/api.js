@@ -19,7 +19,9 @@ export function getRequest(params){
 
     script.src = `${BASE_URL}?${query}&callback=${callbackName}`;
 
-    script.onerror = reject;
+    script.onerror = () => {
+        reject(new Error("Falha ao carregar JSONP: " + script.src));
+    };
 
     document.body.appendChild(script);
 
