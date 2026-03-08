@@ -11,7 +11,11 @@ export function criarTesteService() {
                 action: "listarTestes"
             });
 
+            // formato padrão da API
             if (res?.sucesso) return res.dados || [];
+
+            // caso a API retorne array direto
+            if (Array.isArray(res)) return res;
 
             throw new Error(res?.erro || "Erro ao listar testes");
 
