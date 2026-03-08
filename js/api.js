@@ -45,11 +45,12 @@ export async function postRequest(action, payload) {
 
         const res = await fetch(BASE_URL, {
             method: "POST",
-            mode: "no-cors",
+            mode: "no-cors", //apagar isso aqui depois quando mudarmos para domínio próprio
             body
         });
 
-        return await res.json();
+        //return await res.json(); quando parar de usar o no-cors posso retomar essa linha e apagar a debaixo dessa.
+        return { sucesso: true}
 
     } catch (err) {
 
