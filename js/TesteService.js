@@ -10,12 +10,15 @@ export function criarTesteService() {
             const res = await getRequest({
                 action: "listarTestes"
             });
-
+            console.log("Resposta testes da API: ", res);
             // formato padrão da API
-            if (res?.sucesso) return res.dados || [];
+            if (res && res?.sucesso !== undefined) {
+                return res;
+            }
 
             // caso a API retorne array direto
             if (Array.isArray(res)) return res;
+            
 
             throw new Error(res?.erro || "Erro ao listar testes");
 
