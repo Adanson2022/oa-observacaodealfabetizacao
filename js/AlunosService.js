@@ -8,11 +8,11 @@ export function criarAlunosService() {
         try {
             const res = await getRequest({ action: "listarAlunos" });
 
-            if (res.sucesso) {
+            if (res?.sucesso) {
                 return res;
             }
 
-            console.error("Erro ao listar alunos:", res.erro);
+            console.error("Erro ao listar alunos:", res?.erro);
             return { sucesso: false, dados: [] };
 
         } catch (err) {

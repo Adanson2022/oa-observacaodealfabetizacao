@@ -16,7 +16,7 @@ export function inicializarSelecao({ AlunosService, TesteService, mostrarToast})
 
     async function initSelecao() {
         try {
-
+            // força listarAlunos sem argumentos
             const resAlunos = await AlunosService.listarAlunos();
 
             if (!resAlunos.sucesso) {
