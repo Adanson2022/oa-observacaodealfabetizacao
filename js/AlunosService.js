@@ -8,8 +8,14 @@ export function criarAlunosService() {
         try {
             const res = await getRequest({ action: "listarAlunos" });
 
-            if (res?.sucesso) {
+            // Caso backend já retorne no formato esperado
+            if (res && res?.sucesso !== undefined) {
                 return res;
+            }
+
+            // Caso backend retorne apenas array de alunos
+            if (Array.isArray(res)) {
+                return { sucesso: true, dados: res };
             }
 
             console.error("Erro ao listar alunos:", res?.erro);
