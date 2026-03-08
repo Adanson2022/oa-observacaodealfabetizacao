@@ -40,7 +40,11 @@ export function criarTesteService() {
                 testeId
             });
 
+            // formato padrão
             if (res?.sucesso) return res.dados;
+
+            // caso backend retorne objeto direto
+            if (res && typeof res === "object") return res;
 
             throw new Error(res?.erro || "Erro ao buscar texto");
 
@@ -62,8 +66,12 @@ export function criarTesteService() {
                 testeId
             });
 
+            // formato padrão
             if (res?.sucesso) return res.dados || [];
 
+            // caso backend retorne array direto
+            if (Array.isArray(res)) return res;
+            
             throw new Error(res?.erro || "Erro ao buscar perguntas");
 
         } catch (err) {
