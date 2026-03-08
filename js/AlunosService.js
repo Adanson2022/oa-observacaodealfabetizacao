@@ -7,7 +7,7 @@ export function criarAlunosService() {
     async function listarAlunos() {
         try {
             const res = await getRequest({ action: "listarAlunos" });
-
+            console.log("Resposta da API: ", res);
             // Caso backend já retorne no formato esperado
             if (res && res?.sucesso !== undefined) {
                 return res;
