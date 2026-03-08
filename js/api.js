@@ -1,5 +1,5 @@
 // api.js
-export const BASE_URL = "https://script.google.com/macros/s/AKfycbyq_D1duZ_8Tn4NfjcQCNnUE7fqHql2zkve15YPxYGzM7bMDhFOc1e843JIeAuFSo_OAA/exec";
+export const BASE_URL = "https://script.google.com/macros/s/AKfycbwf6Fd4-iKJvAn71g66X3KTwDBYqUoshQkD9fP-cJZ3EF3KAy7Fgwwq8T7FDB_chRigWA/exec";
 
 export function getRequest(params){
 
