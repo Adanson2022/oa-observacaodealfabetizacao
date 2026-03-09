@@ -324,7 +324,7 @@ export function inicializarAvaliacao({ AvaliacaoService, TesteService, mostrarTo
         const payload = {
 
             alunoId: avaliacaoAtual.aluno.id,
-            id_teste: testeAtual.id,
+            testeId: testeAtual.id,
 
             prosodia: prosodia.value,
 
