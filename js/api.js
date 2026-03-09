@@ -20,6 +20,8 @@ export function getRequest(params){
     script.src = `${BASE_URL}?${query}&callback=${callbackName}`;
 
     script.onerror = () => {
+        delete window[callbackName];
+        document.body.removeChild(script);
         reject(new Error("Falha ao carregar JSONP: " + script.src));
     };
 
@@ -34,7 +36,10 @@ export async function postRequest(action, payload) {
     try {
 
         const body = new URLSearchParams();
-
+        console.log("POST enviado.", {
+            action,
+            payload
+        });
         body.append(
             "data",
             JSON.stringify({

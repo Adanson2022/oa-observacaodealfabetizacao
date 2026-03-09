@@ -7,7 +7,7 @@ export function criarAvaliacaoService() {
     }
 
     async function listarAvaliacoes(alunoId) {
-        return await getRequest({ action: "listarAvaliacoes", alunoid: alunoId });
+        return await getRequest({ action: "listarAvaliacoes",alunoId });
     }
 
     return { registrarAvaliacao, listarAvaliacoes };
